@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio | Roblox Studio — igorblessedbygod</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --gray-dark: #1a1a1a;
+    --gray: #2a2a2a;
+    --gray-mid: #666666;
+    --gray-light: #999999;
+    --white: #f5f5f5;
+    --pure-white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== HERO ===== */
+  header {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 80px 24px;
+  }
+
+  .hero-content {
+    animation: fadeUp 1s ease-out;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    border: 1px solid var(--gray);
+    padding: 8px 18px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+
+  .badge span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--pure-white);
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-size: clamp(42px, 8vw, 88px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  h1 .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--gray-light);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    font-weight: 300;
+  }
+
+  .hero-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gray-light);
+    border: 1px solid var(--gray);
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 48px;
+  }
+
+  .hero-user::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--pure-white);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--pure-white);
+  }
+
+  .scroll-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gray-mid);
+    letter-spacing: 2px;
+    margin-top: 60px;
+    animation: bounce 2s infinite;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--gray-mid);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+  }
+
+  h2 .num {
+    color: var(--gray-mid);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    font-size: 0.5em;
+    vertical-align: super;
+    margin-right: 12px;
+  }
+
+  /* ===== SKILLS ===== */
+  .levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .level-card {
+    background: var(--dark);
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .level-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--pure-white), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .level-card:hover {
+    border-color: var(--white);
+    transform: translateY(-6px);
+    background: var(--gray-dark);
+  }
+
+  .level-card:hover::before {
+    transform: translateX(0);
+  }
+
+  .level-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gray-mid);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .level-card h3 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .level-card .desc {
+    color: var(--gray-light);
+    font-size: 14px;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skill-list li {
+    font-size: 14px;
+    color: var(--white);
+    padding-left: 22px;
+    position: relative;
+    font-weight: 400;
+  }
+
+  .skill-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--pure-white);
+    font-weight: 700;
+  }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .project {
+    background: var(--dark);
+    border: 1px solid var(--gray);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .project:hover {
+    background: var(--pure-white);
+    color: var(--black);
+    transform: translateY(-4px);
+  }
+
+  .project:hover .project-tag {
+    border-color: var(--black);
+    color: var(--black);
+  }
+
+  .project:hover .project-desc {
+    color: var(--gray-dark);
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--gray);
+    color: var(--gray-light);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+    transition: all 0.3s ease;
+  }
+
+  .project h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--gray-light);
+    font-weight: 300;
+    transition: all 0.3s ease;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section {
+    text-align: center;
+    padding-bottom: 80px;
+  }
+
+  .contact-title {
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 40px;
+  }
+
+  .contact-title .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .discord-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--dark);
+    border: 1px solid var(--gray);
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .discord-tag:hover {
+    background: var(--pure-white);
+    color: var(--black);
+    border-color: var(--pure-white);
+    transform: scale(1.03);
+  }
+
+  .discord-tag:hover svg { fill: var(--black); }
+
+  .discord-tag svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--pure-white);
+    transition: fill 0.3s ease;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--gray);
+    padding: 32px 0;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gray-mid);
+    letter-spacing: 2px;
+  }
+
+  /* ===== ANIMAÇÕES ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 80px 0; }
+    h1 { letter-spacing: -2px; }
+    .level-card { padding: 28px 22px; }
+    header { min-height: 90vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <div class="hero-content">
+    <div class="badge"><span></span>Disponível para projetos</div>
+    <h1>
+      ROBLOX<br>
+      <span class="outline">STUDIO</span><br>
+      DEVELOPER
+    </h1>
+    <p class="hero-subtitle">
+      Desenvolvedor focado em scripts, sistemas e experiências otimizadas.
+      Do básico ao avançado — construindo mundos que rodam suave.
+    </p>
+    <div class="hero-user">igorblessedbygod</div>
+    <div class="scroll-hint">↓ SCROLL</div>
+  </div>
+</header>
+
+<!-- HABILIDADES -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">// 01 — Habilidades</div>
+      <h2><span class="num">[01]</span>Nível de domínio</h2>
+    </div>
+
+    <div class="levels">
+      <div class="level-card reveal">
+        <div class="level-num">/ NÍVEL 01</div>
+        <h3>Básico</h3>
+        <p class="desc">Fundamentos sólidos do Studio e da engine.</p>
+        <ul class="skill-list">
+          <li>Interface do Roblox Studio</li>
+          <li>Manipulação de Parts e Modelos</li>
+          <li>Anchoring, Colisões e Constraints</li>
+          <li>Terrain básico</li>
+          <li>Publicação e configuração de jogos</li>
+        </ul>
+      </div>
+
+      <div class="level-card reveal">
+        <div class="level-num">/ NÍVEL 02</div>
+        <h3>Intermediário</h3>
+        <p class="desc">Lógica, scripts e interações funcionais.</p>
+        <ul class="skill-list">
+          <li>Luau (variáveis, loops, funções)</li>
+          <li>Eventos: Touched, ClickDetector, RemoteEvents</li>
+          <li>UI com ScreenGui e TweenService</li>
+          <li>DataStoreService (salvamento)</li>
+          <li>Ferramentas e inventário</li>
+        </ul>
+      </div>
+
+      <div class="level-card reveal">
+        <div class="level-num">/ NÍVEL 03</div>
+        <h3>Avançado</h3>
+        <p class="desc">Sistemas complexos, otimização e performance.</p>
+        <ul class="skill-list">
+          <li>ModuleScripts e arquitetura limpa</li>
+          <li>Pathfinding & IA de NPCs</li>
+          <li>Otimização (StreamingEnabled, LOD)</li>
+          <li>Combate, hitboxes e replicação</li>
+          <li>Integrações com APIs externas (HttpService)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">// 02 — Projetos</div>
+      <h2><span class="num">[02]</span>Trabalhos recentes</h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project reveal">
+        <span class="project-tag">Sistema</span>
+        <h4>Sistema de Combate</h4>
+        <p class="project-desc">Combate corpo a corpo com hitboxes precisas, animações sincronizadas e replicação via RemoteEvents.</p>
+      </div>
+
+      <div class="project reveal">
+        <span class="project-tag">UI / UX</span>
+        <h4>Menu Principal Animado</h4>
+        <p class="project-desc">Interface limpa com transições suaves usando TweenService, sons e feedback visual.</p>
+      </div>
+
+      <div class="project reveal">
+        <span class="project-tag">Data</span>
+        <h4>Sistema de Save/Load</h4>
+        <p class="project-desc">DataStore robusto com profile service, prevenção de perda de dados e backups automáticos.</p>
+      </div>
+
+      <div class="project reveal">
+        <span class="project-tag">IA</span>
+        <h4>NPCs com Pathfinding</h4>
+        <p class="project-desc">NPCs que patrulham, perseguem jogadores e desviam de obstáculos usando PathfindingService.</p>
+      </div>
+
+      <div class="project reveal">
+        <span class="project-tag">Mundo</span>
+        <h4>Mapa Interativo</h4>
+        <p class="project-desc">Ambiente detalhado com iluminação, terrain customizado e áreas exploráveis com segredos.</p>
+      </div>
+
+      <div class="project reveal">
+        <span class="project-tag">Otimização</span>
+        <h4>Otimização de Jogo</h4>
+        <p class="project-desc">Redução de lag com StreamingEnabled, LOD, scripts server-side inteligentes e profiling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact-section">
+  <div class="container">
+    <div class="section-label reveal">// 03 — Contato</div>
+    <h2 class="contact-title reveal">
+      VAMOS<br>
+      <span class="outline">TRABALHAR</span><br>
+      JUNTOS
+    </h2>
+    <div class="reveal" style="margin-top: 40px;">
+      <a href="https://discord.com/users/793536636973613087" target="_blank" rel="noopener" class="discord-tag">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        igorblessedbygod
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 IGORBLESSEDBYGOD — FEITO COM ROBLOX STUDIO E CAFÉ
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('active'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
